@@ -2,7 +2,12 @@
   "name": "js-starter-kit",
   "version": "1.0.0",
   "description": "JavaScript Starter Kit",
-  "scripts": {},
+  "scripts": {
+    "prestart": "node buildScripts/startMessage.js",
+    "start": "node buildScripts/srcServer.js",
+    "security-check": "nsp check",
+    "share": "lt --port 3000"
+  },
   "author": "Daniele Damiani",
   "license": "MIT",
   "dependencies": {
