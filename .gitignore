@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# fake db to mock api
+src/api/db.json
