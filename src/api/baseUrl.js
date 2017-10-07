@@ -7,7 +7,7 @@ export default function getBaseUrl() {
 function getQueryStringParamenterByName(name, url) {
   if(!url) { url = window.location.href; }
 
-  name = name.replace(/[\[\]]/g, '\\$&');
+  name = name.replace(/[[\]]/g, '\\$&');
   var regExp = '[?&]' + name + '(=([^&#]*)|&|#|$)',
       regExpObj =  new RegExp(regExp),
       results = regExpObj.exec(url);
