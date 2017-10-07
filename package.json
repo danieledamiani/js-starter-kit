@@ -19,7 +19,8 @@
     "clean-dist": "rimraf ./dist && mkdir dist",
     "prebuild": "npm-run-all clean-dist test lint",
     "build": "babel-node buildScripts/build.js",
-    "postbuild": "babel-node buildScripts/distServer.js"
+    "postbuild": "babel-node buildScripts/distServer.js",
+    "deploy": "aws s3 sync dist/"
   },
   "author": "Daniele Damiani",
   "license": "MIT",
