@@ -59,3 +59,6 @@ typings/
 
 # fake db to mock api
 src/api/db.json
+
+# dist folder
+dist/
