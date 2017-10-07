@@ -6,16 +6,22 @@ export default {
   debug: true,
   devtool: 'source-map',
   noInfo: false,
-  entry: [
-    path.resolve(__dirname, 'src/index')
-  ],
+  entry: {
+    vendor: path.resolve(__dirname, 'src/vendor'),
+    main: path.resolve(__dirname, 'src/index')
+  },
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   plugins: [
+    // create separate bundle for vendor libraries so they're cached separately.
+    // the value of name must match the property of entry
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
     // create html file that includes reference to bundled JS
     new HtmlWebpackPlugin({
       template: 'src/index.html',
