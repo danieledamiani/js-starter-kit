@@ -8,6 +8,7 @@ export default {
   },
   devtool: 'inline-source-map',
   entry: [
+    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
     path.resolve(__dirname, 'src/index')
   ],
   target: 'web',
@@ -27,7 +28,9 @@ export default {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       inject: true
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
   module: {
     loaders: [
