@@ -62,3 +62,6 @@ src/api/db.json
 
 # dist folder
 dist/
+
+# keep our secrets..
+secrets.json
