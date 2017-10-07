@@ -5,12 +5,15 @@ import { schema } from './mockDataSchema';
 import fs from 'fs';
 import chalk from 'chalk';
 
-const json = JSON.stringify(jsf(schema));
+jsf.extend('faker', () => require('faker'));
 
-fs.writeFile('./src/api/db.json', json, err => {
-  if(err) {
-    console.log(chalk.red(err));
-  } else {
-    console.log(chalk.green('Mock data generated'));
-  }
-});
+jsf.resolve(schema)
+  .then(result => {
+    fs.writeFile('./src/api/db.json', JSON.stringify(result), err => {
+      if(err) {
+        console.log(chalk.red(err));
+      } else {
+        console.log(chalk.green('Mock data generated'));
+      }
+    });
+  });
