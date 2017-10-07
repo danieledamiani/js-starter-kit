@@ -2,5 +2,13 @@
 JavaScript Starter Kit
 
 # Global utilities
- - nsp check (modules security check)
- - lt --port 3000 --subdomain danieledamiani (exposes a local server)
+ - nsp check // Modules security check
+ - lt --port 3000 --subdomain danieledamiani // Exposes a local server
+ - npm start -s // Silent mode
+ - npm run build // Creates a build
+
+ # Deploy to AWS S3 bucket
+ npm run deploy -- s3://mybucket.mydomain
+
+ # ToDo
+ - improve browser reloading
