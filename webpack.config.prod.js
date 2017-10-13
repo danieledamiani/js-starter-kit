@@ -39,6 +39,7 @@ export default {
     // create html file that includes reference to bundled JS
     new HtmlWebpackPlugin({
       template: 'src/index.html',
+      favicon: 'src/favicon.ico',
       inject: true,
       minify: {
         removeComments: true,
