@@ -12,5 +12,5 @@ JavaScript Starter Kit
 
 # ToDo
   - improve browser reloading
-  - move jsdom test syntax from legacy to current v5
   - package starter kit in a npm module
+  - update to webpack 3
