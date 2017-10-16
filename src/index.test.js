@@ -1,6 +1,6 @@
 import  { expect } from 'chai';
-import jsdom from 'jsdom/lib/old-api.js';
 import fs from 'fs';
+import { JSDOM } from 'jsdom';
 
 describe('My first test', () => {
   it('should pass', () => {
@@ -9,14 +9,11 @@ describe('My first test', () => {
 });
 
 describe('index.html', () => {
-  it('should have h1 that says Users', (done) => {
+  it('should have h1 that says Users', () => {
     const index = fs.readFileSync('./src/index.html', 'utf-8');
-    jsdom.env(index, (err, window) => {
-      const h1 = window.document.getElementsByTagName('h1')[0];
-      const expected = 'Users';
-      expect(h1.innerHTML).to.equal(expected);
-      done();
-      window.close();
-    });
+    const dom = new JSDOM(index);
+    const h1 = dom.window.document.getElementsByTagName('h1')[0];
+    const expected = 'Users';
+    expect(h1.innerHTML).to.equal(expected);
   });
 });
