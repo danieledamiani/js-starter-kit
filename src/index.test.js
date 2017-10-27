@@ -1,10 +1,14 @@
 import  { expect } from 'chai';
+import sinon from 'sinon';
 import fs from 'fs';
 import { JSDOM } from 'jsdom';
 
-describe('My first test', () => {
+describe('Check test env', () => {
   it('should pass', () => {
+    const mock = sinon.stub().returns(3);
+
     expect(true).to.equal(true);
+    expect(mock()).to.eql(3);
   });
 });
 
@@ -14,6 +18,7 @@ describe('index.html', () => {
     const dom = new JSDOM(index);
     const h1 = dom.window.document.getElementsByTagName('h1')[0];
     const expected = 'Users';
+
     expect(h1.innerHTML).to.equal(expected);
   });
 });
