@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
 export default {
   resolve: {
@@ -25,7 +26,18 @@ export default {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
-      noInfo: true // set to false to see a list of every file being bundled.
+      noInfo: true, // set to false to see a list of every file being bundled.
+      options: {
+        sassLoader: {
+          includePaths: [path.resolve(__dirname, 'src', 'scss')]
+        },
+        context: '/',
+        postcss: () => [autoprefixer],
+      }
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
     }),
     // generates external css file with hash in filename
     new ExtractTextPlugin('[name].[contenthash].css'),
@@ -61,8 +73,14 @@ export default {
   ],
   module: {
     loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
-      {test: /\.css$/, loaders: ['style-loader','css-loader']}
+      {test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
+      {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+      {test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml'},
+      {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]'},
+      {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
+      {test: /(\.css|\.scss)$/, loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader?sourceMap']}
     ]
   }
 }
